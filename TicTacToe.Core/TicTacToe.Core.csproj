@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="ComputerAI\" />
-    <Folder Include="Validation\" />
-  </ItemGroup>
-
 </Project>
