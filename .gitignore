@@ -8,3 +8,15 @@
 /TicTacToe.Api/.vs
 /TicTacToe.Api/bin/Debug/net10.0
 /TicTacToe.Api/obj
+/TicTacToe.Tests/bin/Debug/net10.0/TicTacToe.Core.dll
+/TicTacToe.Tests/bin/Debug/net10.0/TicTacToe.Core.pdb
+/TicTacToe.Tests/bin/Debug/net10.0/TicTacToe.Core.Tests.dll
+/TicTacToe.Tests/bin/Debug/net10.0/TicTacToe.Core.Tests.pdb
+/TicTacToe.Tests/obj/Debug/net10.0/ref/TicTacToe.Core.Tests.dll
+/TicTacToe.Tests/obj/Debug/net10.0/refint/TicTacToe.Core.Tests.dll
+/TicTacToe.Tests/obj/Debug/net10.0/TicTacToe.Core.Tests.AssemblyInfo.cs
+/TicTacToe.Tests/obj/Debug/net10.0/TicTacToe.Core.Tests.AssemblyInfoInputs.cache
+/TicTacToe.Tests/obj/Debug/net10.0/TicTacToe.Core.Tests.csproj.AssemblyReference.cache
+/TicTacToe.Tests/obj/Debug/net10.0/TicTacToe.Core.Tests.dll
+/TicTacToe.Tests/obj/Debug/net10.0/TicTacToe.Core.Tests.pdb
+/TicTacToe.Tests/obj/Debug/net10.0/TicTacToe.Core.Tests.sourcelink.json

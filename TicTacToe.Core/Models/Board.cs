@@ -8,12 +8,11 @@ namespace TicTacToe.Core.Models
 {
     public class Board
     {
-        private Player[][] Cells { get; } =
-        {
+        private readonly Player[][] _cells = [new Player[3],
          new Player[3],
-         new Player[3],
-         new Player[3]
-        };
+         new Player[3]];
+
+        public Player[][] Cells => _cells;
 
         public Player[][] GetCurrentBoard() 
         { 
