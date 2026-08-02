@@ -27,7 +27,7 @@ jobs:
     - name: Test
       run: dotnet test TicTacToe.Api/TicTacToe.slnx --no-build --verbosity normal
     - name: Publish Backend
-      run: dotnet publish TicTacToe.Api/TicTacToe.Api/TicTacToe.Api.csproj -c Release -o publish/backend
+      run: dotnet publish TicTacToe.Api/TicTacToe.Api.csproj -c Release -o publish/backend
     - name: Upload Backend Artifact
       uses: actions/upload-artifact@v4
       with:
