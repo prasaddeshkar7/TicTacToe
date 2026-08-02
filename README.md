@@ -338,10 +338,17 @@ Before running the application, ensure the following are installed:
 
 # Running the Backend
 
+Clone the backend repo
+
+```bash
+git clone https://github.com/prasaddeshkar7/TicTacToe.git
+```
+
+
 Navigate to the backend project.
 
 ```bash
-cd TicTacToe.Api
+cd TicTacToe/TicTacToe.Api
 ```
 
 Restore packages.
@@ -359,14 +366,18 @@ dotnet run
 Swagger will be available at:
 
 ```
-https://localhost:xxxx/swagger
+https://localhost:5225/swagger
 ```
-
-(The port number may vary depending on the local environment.)
 
 ---
 
 # Running the Frontend
+
+Clone the frontend repo 
+
+```
+git clone https://github.com/prasaddeshkar7/TicTacToeUi.git
+```
 
 Navigate to the Angular project.
 
@@ -414,6 +425,9 @@ The frontend communicates with the backend REST APIs configured in `environment.
 
 Run all backend tests using:
 
+Navigate to the backend repo i.e. TicTacToe
+Run below command to run all tests in TicTacToe.slnx
+
 ```bash
 dotnet test
 ```
@@ -435,18 +449,63 @@ The solution includes unit tests covering:
 
 # AI Usage Summary
 
-AI-assisted development tools were used to accelerate development while maintaining ownership of the implementation.
+AI was used as a development assistant throughout this assessment to improve productivity and accelerate implementation. It was primarily used for discussing design approaches, generating initial code drafts, reviewing implementations, brainstorming test scenarios, and preparing documentation.
+
+The final solution is the result of iterative development and manual review rather than direct acceptance of AI-generated code.
+
+## How AI was used
 
 AI assistance included:
 
-* Converting the assessment requirements into a development plan.
-* Discussing architecture and design alternatives.
-* Generating initial implementations for repetitive code.
-* Reviewing code for improvements.
-* Generating unit test scenarios.
-* Preparing documentation.
+* Discussing the overall solution architecture and implementation strategy.
+* Generating initial implementations for repetitive or boilerplate code.
+* Explaining framework concepts and best practices for ASP.NET Core and Angular.
+* Reviewing implementation ideas and suggesting possible improvements.
+* Brainstorming unit test scenarios based on the assessment requirements.
+* Assisting in preparing project documentation and the README.
 
-All generated code was manually reviewed, adapted, integrated, tested, and validated before submission.
+## Human Review and Adaptation
+
+Every AI-generated suggestion was manually reviewed before being incorporated into the project.
+
+Where appropriate, the generated code was modified to better align with my own design decisions, coding style, and understanding of the problem. This included:
+
+* Reviewing all generated code before integration into the solution.
+* Refactoring implementations where I considered alternative approaches to be more appropriate.
+* Debugging issues manually and identifying root causes rather than relying solely on generated suggestions.
+* Verifying functionality through manual testing using Swagger and the Angular frontend.
+* Writing and extending unit tests to validate the final implementation.
+
+## Design Decisions Made During Development
+
+Several implementation decisions were intentionally made or refined during development after reviewing AI-generated suggestions. Examples include:
+
+* Implementing the game board using an encapsulated internal representation rather than exposing mutable state directly.
+* Choosing a `Stack<Move>` to store move history in order to optimize Undo operations using Last-In-First-Out (LIFO) semantics.
+* Using thin API controllers with business logic delegated to dedicated service classes.
+* Keeping the project structure intentionally simple while maintaining separation of concerns through dedicated projects for API, domain logic, infrastructure, and tests.
+* Introducing global exception handling middleware to centralize error handling.
+* Using dependency injection throughout the application to improve modularity and testability.
+* Implementing the computer player's move selection as a dedicated strategy component to keep orchestration separate from decision-making logic.
+
+## Testing
+
+AI was used to suggest potential unit test scenarios based on the assessment requirements. Those suggestions were reviewed, refined, and expanded before implementation.
+
+Additional scenarios were added based on my own analysis of the game rules, service orchestration, edge cases, and expected application behaviour to improve overall test coverage.
+
+## Ownership
+
+I remained responsible for:
+
+* Understanding every implemented component.
+* Reviewing and adapting generated code.
+* Architectural decisions and trade-offs.
+* Integration between the backend and frontend.
+* Debugging runtime issues.
+* Testing and validating the final behaviour.
+* Producing the final submission.
+
 
 ---
 
