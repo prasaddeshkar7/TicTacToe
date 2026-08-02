@@ -528,6 +528,8 @@ The following assumptions were made during implementation:
 * Authentication and authorization are not implemented.
 * Real-time synchronization between multiple browser sessions is not included.
 * The computer opponent follows a deterministic priority-based strategy rather than a Minimax algorithm.
+* Unit tests have been implemented for the backend only. Frontend unit tests were not included due to time constraints and are identified as a future improvement.
+
 
 ---
 
