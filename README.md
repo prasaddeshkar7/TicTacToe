@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-A full-stack Tic Tac Toe application built using **Angular** and **ASP.NET Core** following **Clean Architecture** principles.
+A full-stack Tic Tac Toe application built using **Angular** and **ASP.NET Core**.
 
 The application allows users to play Tic Tac Toe in either **Two Player** mode or **Computer** mode. The backend acts as the single source of truth and exposes REST APIs that manage the complete game lifecycle, including move validation, win detection, draw detection, undo functionality, move history, and a session-level scoreboard.
 
@@ -29,41 +29,63 @@ The frontend is implemented using Angular standalone components and Angular Mate
 
 # Architecture
 
-The solution follows the principles of **Clean Architecture**, separating business logic from infrastructure and presentation concerns. This keeps the core game logic independent, testable, and easy to extend.
+The solution uses a Clean Architecture-inspired layered design, with dependency inversion through interfaces and a clear separation of API, application, domain and repository responsibilities.
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│                    Angular Frontend                          │
-│                                                              │
-│  Components  →  Services  →  HttpClient                      │
-└───────────────────────────────┬──────────────────────────────┘
-                                │ REST API
-                                ▼
-┌──────────────────────────────────────────────────────────────┐
-│                  ASP.NET Core Web API                        │
-│                                                              │
-│               Controllers (Thin API Layer)                   │
-└───────────────────────────────┬──────────────────────────────┘
-                                ▼
-┌──────────────────────────────────────────────────────────────┐
-│                 Application / Service Layer                  │
-│                                                              │
-│                     GameService                              │
-└───────────────────────────────┬──────────────────────────────┘
-                                ▼
-┌──────────────────────────────────────────────────────────────┐
-│                     Domain Layer                             │
-│                                                              │
-│ Game • Board • Move • Scoreboard • Computer Strategy         │
-│ Business Rules                                               │
-└───────────────────────────────┬──────────────────────────────┘
-                                ▼
-┌──────────────────────────────────────────────────────────────┐
-│                 Repository Layer                             │
-│                                                              │
-│ GameRepository • ScoreboardRepository                        │
-│ (In-Memory Storage)                                          │
-└──────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────┐
+│                  Angular Frontend                   │
+│                                                     │
+│      Components → Services → HttpClient             │
+└──────────────────────────┬──────────────────────────┘
+                           │
+                        REST / HTTP
+                           │
+                           ▼
+┌─────────────────────────────────────────────────────┐
+│               TicTacToe.Api                         │
+│                                                     │
+│  Controllers                                        │
+│  - HTTP request/response handling                   │
+│  - Validation / routing concerns                    │
+│  - Thin API layer                                   │
+└──────────────────────────┬──────────────────────────┘
+                           │
+                           ▼
+┌─────────────────────────────────────────────────────┐
+│               TicTacToe.Core                        │
+│                                                     │
+│  Application / Services                             │
+│  - GameService                                      │
+│  - ComputerStrategy                                 │
+│                                                     │
+│  Domain                                             │
+│  - Game                                             │
+│  - Board                                            │
+│  - Move                                             │
+│  - Scoreboard                                       │
+│  - Business rules                                   │
+│                                                     │
+│  Interfaces / Abstractions                          │
+│  - IGameService                                     │
+│  - IGameRepository                                  │
+│  - IScoreboardRepository                            │
+│  - IComputerStrategy                                │
+│                                                     │
+│  Repository Implementations                         │
+│  - GameRepository                                   │
+│  - ScoreboardRepository                             │
+│  - In-memory storage                                │
+└─────────────────────────────────────────────────────┘
+                           ▲
+                           │
+                    Dependency Inversion
+                    through interfaces
+                           │
+┌─────────────────────────────────────────────────────┐
+│               TicTacToe.Tests                       │
+│                                                     │
+│               MSTest + Moq                          │
+└─────────────────────────────────────────────────────┘
 ```
 
 ## Responsibilities
@@ -127,16 +149,20 @@ Both repositories are registered as Singleton services so that state is shared a
 
 # Design Decisions
 
-## Clean Architecture
+## Clean Architecture-Inspired Design
 
-The application follows Clean Architecture to separate business logic from infrastructure and presentation concerns.
+The application uses Clean Architecture principles rather than a strict multi-project Clean Architecture implementation.
 
-This approach provides the following benefits:
+The key goals are:
 
-* Business rules remain independent of ASP.NET Core and Angular.
-* The core domain can be unit tested without web or persistence dependencies.
-* Infrastructure implementations (such as repositories or databases) can be replaced without affecting the domain layer.
-* Controllers remain thin and only coordinate HTTP requests and responses.
+Separation of concerns
+Dependency inversion
+Testability
+Thin controllers
+Isolated business rules
+Replaceable repository implementations
+
+Because this is a small assessment application, application services, domain models, abstractions and repository implementations are grouped within TicTacToe.Core rather than split into separate assemblies.
 
 ---
 
@@ -171,7 +197,7 @@ This provides:
 
 The repositories are registered as **Singleton** services.
 
-This decision was made because the assessment requires maintaining a session-level game state and scoreboard while using in-memory storage.
+This decision was made because the assessment requires maintaining a application-level game state and scoreboard while using in-memory storage.
 
 Using Singleton ensures:
 
@@ -192,7 +218,6 @@ Advantages:
 * O(1) undo (`Pop`)
 * Simple implementation
 
-Although the UI displays moves chronologically, the underlying storage remains optimized for Undo operations.
 
 ---
 
